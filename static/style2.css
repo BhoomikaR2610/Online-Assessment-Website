@@ -1,0 +1,100 @@
+/* ===== CONTINUE / INSTRUCTIONS PAGE ===== */
+
+.instruction-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(120deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.instruction-card {
+    background: #ffffff;
+    max-width: 650px;
+    width: 100%;
+    padding: 40px 45px;
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+}
+
+.instruction-card h1 {
+    color: #1e3c72;
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* ----- INSTRUCTION LIST ----- */
+.instruction-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.instruction-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 14px;
+    font-size: 15px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.instruction-list li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #1e3c72;
+    font-weight: bold;
+}
+
+/* ----- ACTION AREA ----- */
+.action-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    background: #1e3c72;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.primary-btn:hover {
+    background: #16305a;
+}
+
+.secondary-link {
+    font-size: 14px;
+    color: #1e3c72;
+    text-decoration: none;
+}
+
+.secondary-link:hover {
+    text-decoration: underline;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 600px) {
+    .instruction-card {
+        padding: 30px 25px;
+    }
+
+    .instruction-card h1 {
+        font-size: 22px;
+    }
+}

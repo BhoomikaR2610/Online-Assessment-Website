@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Student Registration</h2>
+
+    {% for msg in get_flashed_messages() %}
+        <div class="flash">{{ msg }}</div>
+    {% endfor %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <input name="name" placeholder="Full Name" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <input name="password" type="password" placeholder="Password" required>
+        <input name="course" placeholder="Course">
+        <input name="school" placeholder="School">
+        <input name="semester" placeholder="Semester">
+        <input type="file" name="photo" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <a href="{{ url_for('login') }}">Already registered? Login</a>
+
+</div>
+
+</body>
+</html>

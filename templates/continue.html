@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Next Step</title>
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* ===== BODY ===== */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #1e3c72, #2a5298);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            background: #ffffff;
+            max-width: 650px;
+            width: 100%;
+            padding: 40px 45px;
+            border-radius: 14px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        /* ===== HEADINGS ===== */
+        .container h2 {
+            color: #1e3c72;
+            margin-bottom: 12px;
+            font-size: 26px;
+        }
+
+        .container p {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* ===== LIST ===== */
+        .container ul {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .container ul li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .container ul li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+
+        /* ===== BUTTON ===== */
+        .container button {
+            width: 100%;
+            padding: 14px;
+            background: #1e3c72;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .container button:hover {
+            background: #16305a;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 25px;
+            }
+
+            .container h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome to Assessment Portal</h2>
+
+    <p>Please read the instructions carefully before proceeding.</p>
+
+    <ul>
+        <li>Ensure stable internet</li>
+        <li>Camera permission may be required</li>
+        <li>Do not refresh the page</li>
+    </ul>
+
+    <!-- Button navigates to assessment route -->
+    <form action="{{ url_for('assessment') }}" method="get">
+        <button type="submit">Start Assessment</button>
+    </form>
+</div>
+
+</body>
+</html>

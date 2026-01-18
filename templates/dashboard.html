@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- HEADER -->
+    <div class="dashboard-header">
+        <h1>Student Dashboard</h1>
+        <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <!-- PROFILE CARD -->
+    <div class="profile-card">
+
+        <!-- LEFT : PHOTO -->
+        <div class="profile-photo">
+            <img src="{{ url_for('static', filename='uploads/photos/' + user.photo) }}" alt="Student Photo">
+        </div>
+
+        <!-- RIGHT : DETAILS -->
+        <div class="profile-details">
+            <h2>{{ user.name }}</h2>
+            <p class="email">{{ user.email }}</p>
+
+            <div class="info-grid">
+                <div>
+                    <span>Course</span>
+                    <p>{{ user.course }}</p>
+                </div>
+                <div>
+                    <span>School</span>
+                    <p>{{ user.school }}</p>
+                </div>
+                <div>
+                    <span>Semester</span>
+                    <p>{{ user.semester }}</p>
+                </div>
+            </div>
+
+            <form action="{{ url_for('continue_page') }}" method="get">
+                <button class="continue-btn" type="submit">
+                    Continue to Assessment
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+<script>
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(() => alert("Webcam allowed"))
+.catch(() => alert("Webcam permission required"));
+</script>

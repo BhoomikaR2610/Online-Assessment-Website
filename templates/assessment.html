@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assessment</title>
+    <style>
+        body { font-family: Arial; margin:0; padding:20px; }
+        .timer { font-size:20px; font-weight:bold; position:fixed; top:10px; right:10px; color:black; }
+        .question { display:none; margin-bottom:20px; }
+        .question.active { display:block; }
+        .options label { display:block; margin-bottom:8px; }
+        #manualSubmit { padding:10px 20px; background:green; color:white; border:none; cursor:pointer; }
+        .webcam { position:fixed; top:50px; right:20px; width:200px; height:150px; border:2px solid #000; border-radius:8px; }
+    </style>
+</head>
+<body>
+
+<h2>Assessment</h2>
+<div class="timer" id="timer">05:00</div>
+<video id="webcam" class="webcam" autoplay muted></video>
+
+<form id="quizForm" method="POST" action="{{ url_for('assessment') }}">
+    {% for q in questions %}
+    <div class="question" id="question-{{ loop.index0 }}">
+        <p><strong>{{ loop.index }}. {{ q.question }}</strong></p>
+        <div class="options">
+            {% for opt in q.options %}
+            <label><input type="radio" name="{{ q.id }}" value="{{ opt }}"> {{ opt }}</label>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <button type="button" id="manualSubmit">Submit Assessment</button>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const questions = document.querySelectorAll(".question");
+    questions[0].classList.add("active");
+
+    // Timer
+    let totalTime = 300; // 5 minutes
+    let warnedOneMinute = false;
+    const timerEl = document.getElementById("timer");
+    const timerInterval = setInterval(() => {
+        const minutes = Math.floor(totalTime/60);
+        const seconds = totalTime % 60;
+        timerEl.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+        if(totalTime <= 60) timerEl.style.color = "red";
+        if(totalTime <= 60 && !warnedOneMinute) { alert("1 minute remaining!"); warnedOneMinute = true; }
+        if(totalTime < 0) { clearInterval(timerInterval); submitForm(); }
+        totalTime--;
+    }, 1000);
+
+    function submitForm(){
+        const form = document.getElementById("quizForm");
+        const formData = new FormData(form);
+        fetch(form.action, { method: "POST", body: formData })
+            .then(res => { window.location.href = "{{ url_for('result') }}"; });
+    }
+
+    // Manual submit
+    document.getElementById("manualSubmit").addEventListener("click", ()=>{
+        const answered = Array.from(questions).filter(q=>q.querySelector('input[type="radio"]:checked')).length;
+        const unanswered = questions.length - answered;
+        if(confirm(`Submit now?\nAnswered: ${answered}\nUnanswered: ${unanswered}`)) {
+            clearInterval(timerInterval);
+            submitForm();
+        }
+    });
+
+    // Webcam
+    const video = document.getElementById("webcam");
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+        navigator.mediaDevices.getUserMedia({video:true})
+            .then(stream=>video.srcObject=stream)
+            .catch(()=>alert("Unable to access webcam"));
+
+    // Fullscreen on click
+    video.addEventListener("click", ()=>{ if(video.requestFullscreen) video.requestFullscreen(); });
+});
+</script>
+
+</body>
+</html>
