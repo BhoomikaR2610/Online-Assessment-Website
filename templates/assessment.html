@@ -82,3 +82,387 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
+
+-------------------------------------------------updated code---------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assessment</title>
+
+<!--<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    padding: 20px;
+}
+
+.timer {
+    font-size: 20px;
+    font-weight: bold;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.question {
+    display: none;
+}
+
+.question.active {
+    display: block;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.controlbtn {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.controlbtn button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.controlbtn button:hover {
+    background-color: #028a57;
+    transform: translateY(-2px);
+}
+
+.controlbtn button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+#manualSubmit {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.webcam {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    width: 200px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+</style> -->
+<style>
+/* ===== GLOBAL ===== */
+body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e3f2fd, #f7f8e9);
+}
+
+/* ===== CONTAINER ===== */
+form {
+    max-width: 750px;
+    margin: 80px auto 40px;
+    background: white;
+    padding: 30px 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ===== HEADER ===== */
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #2e7d32;
+    font-size: 30px;
+}
+
+/* ===== TIMER ===== */
+.timer {
+    font-size: 18px;
+    font-weight: bold;
+    background: white;
+    padding: 10px 18px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: #2e7d32;
+}
+label
+{
+    padding:20px;
+  
+}
+
+/* ===== QUESTIONS ===== */
+.question {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.question.active {
+    display: block;
+}
+
+.question p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* ===== OPTIONS ===== */
+.options label {
+    display: flex;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.options label:hover {
+    background: #e8f5e9;
+    transform: scale(1.02);
+}
+
+.options input {
+    margin-right: 12px;
+    transform: scale(1.2);
+}
+
+/* ===== BUTTONS ===== */
+.controlbtn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.controlbtn button {
+    background: linear-gradient(135deg, #43a047, #66bb6a);
+    border: none;
+    color: white;
+    padding: 14px 32px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.controlbtn button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+.controlbtn button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+#manualSubmit {
+    width: 100%;
+    margin-top: 35px;
+    padding: 15px;
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#manualSubmit:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    transform: translateY(-2px);
+}
+
+/* ===== WEBCAM ===== */
+.webcam {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 220px;
+    height: 160px;
+    border-radius: 14px;
+    border: 3px solid #4caf50;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    form {
+        margin: 100px 15px 40px;
+        padding: 25px;
+    }
+
+    .webcam {
+        width: 160px;
+        height: 120px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Assessment</h2>
+<div class="timer" id="timer">05:00</div>
+<video id="webcam" class="webcam" autoplay muted></video>
+
+<form id="quizForm" method="POST" action="{{ url_for('assessment') }}">
+{% for q in questions %}
+<div class="question" id="question-{{ loop.index0 }}">
+    <p><strong>{{ loop.index }}. {{ q.question }}</strong></p>
+    {% for opt in q.options %}
+    <label>
+        <input type="radio" name="{{ q.id }}" value="{{ opt }}">
+        {{ opt }}
+    </label><br>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<div class="controlbtn">
+    <button type="button" id="prev" disabled>Previous</button>
+    <button type="button" id="next">Next</button>
+</div>
+
+<button type="button" id="manualSubmit">Submit Assessment</button>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+const questions = document.querySelectorAll(".question");
+let currentIndex = 0;
+questions[0].classList.add("active");
+
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+function updateButtons() {
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === questions.length - 1;
+}
+
+function showQuestion(i) {
+    questions.forEach(q => q.classList.remove("active"));
+    questions[i].classList.add("active");
+    updateButtons();
+}
+
+nextBtn.onclick = () => {
+    if (currentIndex < questions.length - 1) {
+        currentIndex++;
+        showQuestion(currentIndex);
+    }
+};
+
+prevBtn.onclick = () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        showQuestion(currentIndex);
+    }
+};
+
+// TIMER
+let totalTime = 300;
+let warned = false;
+const timerEl = document.getElementById("timer");
+
+const timerInterval = setInterval(() => {
+    let min = Math.floor(totalTime / 60);
+    let sec = totalTime % 60;
+    timerEl.textContent = `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+
+    if (totalTime <= 60) timerEl.style.color = "red";
+
+    if (totalTime === 60 && !warned) {
+        alert("1 minute remaining!");
+        warned = true;
+    }
+
+    if (totalTime === 0) {
+        clearInterval(timerInterval);
+        submitForm();
+    }
+
+    totalTime--;
+}, 1000);
+
+function submitForm() {
+    stopWebcam();
+    const form = document.getElementById("quizForm");
+    fetch(form.action, { method: "POST", body: new FormData(form) })
+        .then(() => window.location.href = "{{ url_for('result') }}");
+}
+
+document.getElementById("manualSubmit").onclick = () => {
+    const answered = [...questions].filter(q =>
+        q.querySelector('input:checked')
+    ).length;
+
+    if (confirm(`Answered: ${answered}\nUnanswered: ${questions.length - answered}\nSubmit now?`)) {
+        clearInterval(timerInterval);
+        submitForm();
+    }
+};
+
+// WEBCAM
+let stream;
+const video = document.getElementById("webcam");
+
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(s => {
+        stream = s;
+        video.srcObject = stream;
+    })
+    .catch(() => alert("Webcam access denied"));
+
+function stopWebcam() {
+    if (stream) stream.getTracks().forEach(t => t.stop());
+}
+
+video.onclick = () => video.requestFullscreen?.();
+
+});
+</script>
+
+</body>
+</html>
+
