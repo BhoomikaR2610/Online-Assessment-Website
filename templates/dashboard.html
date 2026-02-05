@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,19 +11,24 @@
 
     <!-- HEADER -->
     <div class="dashboard-header">
-        <h1>Student Dashboard</h1>
-        <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+        <div class="logo-area">
+            <div class="logo-box">
+                <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo">
+            </div>
+            <h1>Student Dashboard</h1>
+        </div>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
     </div>
 
     <!-- PROFILE CARD -->
     <div class="profile-card">
 
-        <!-- LEFT : PHOTO -->
+        <!-- PHOTO -->
         <div class="profile-photo">
             <img src="{{ url_for('static', filename='uploads/photos/' + user.photo) }}" alt="Student Photo">
         </div>
 
-        <!-- RIGHT : DETAILS -->
+        <!-- DETAILS -->
         <div class="profile-details">
             <h2>{{ user.name }}</h2>
             <p class="email">{{ user.email }}</p>
@@ -43,11 +48,22 @@
                 </div>
             </div>
 
-            <form action="{{ url_for('continue_page') }}" method="get">
-                <button class="continue-btn" type="submit">
-                    Continue to Assessment
-                </button>
-            </form>
+            {% if status == "NOT_STARTED" %}
+                <form action="{{ url_for('assessment') }}" method="get">
+                    <button class="continue-btn">Start Assessment</button>
+                </form>
+
+            {% elif status == "IN_PROGRESS" %}
+                <p class="warning">Assessment in progress...</p>
+                <form action="{{ url_for('assessment') }}" method="get">
+                    <button class="continue-btn">Continue Assessment</button>
+                </form>
+
+            {% elif status == "COMPLETED" %}
+                <form action="{{ url_for('result') }}" method="get">
+                    <button class="continue-btn">View Result</button>
+                </form>
+            {% endif %}
         </div>
 
     </div>
