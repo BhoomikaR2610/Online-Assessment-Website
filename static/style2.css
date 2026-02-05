@@ -1,100 +1,196 @@
-/* ===== CONTINUE / INSTRUCTIONS PAGE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-.instruction-wrapper {
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* BODY */
+body {
     min-height: 100vh;
-    background: linear-gradient(120deg, #1e3c72, #2a5298);
+    background: linear-gradient(135deg, #5f2cff, #7b6cff);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* CONTAINER */
+.dashboard-container {
+    width: 100%;
+    max-width: 1000px;
     padding: 20px;
 }
 
-.instruction-card {
-    background: #ffffff;
-    max-width: 650px;
-    width: 100%;
-    padding: 40px 45px;
-    border-radius: 14px;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.25);
-}
-
-.instruction-card h1 {
-    color: #1e3c72;
-    margin-bottom: 8px;
-    font-size: 26px;
-}
-
-.subtitle {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 25px;
-}
-
-/* ----- INSTRUCTION LIST ----- */
-.instruction-list {
-    list-style: none;
-    margin-bottom: 30px;
-}
-
-.instruction-list li {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 14px;
-    font-size: 15px;
-    color: #333;
-    line-height: 1.5;
-}
-
-.instruction-list li::before {
-    content: "✔";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #1e3c72;
-    font-weight: bold;
-}
-
-/* ----- ACTION AREA ----- */
-.action-area {
+/* HEADER */
+.dashboard-header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+/* LOGO */
+.logo-area {
+    display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.primary-btn {
-    width: 100%;
-    padding: 14px;
-    background: #1e3c72;
+.logo-box {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background:
+        linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)) padding-box,
+        linear-gradient(135deg, #ffffff, #cfc9ff) border-box;
+    border: 2px solid transparent;
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.logo-box img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.logo-box:hover {
+    transform: rotate(8deg) scale(1.05);
+}
+
+/* LOGOUT */
+.logout-btn {
+    background: rgba(255,255,255,0.25);
     color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.primary-btn:hover {
-    background: #16305a;
-}
-
-.secondary-link {
-    font-size: 14px;
-    color: #1e3c72;
+    padding: 10px 18px;
+    border-radius: 12px;
     text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
 }
 
-.secondary-link:hover {
-    text-decoration: underline;
+.logout-btn:hover {
+    background: rgba(255,255,255,0.4);
 }
 
-/* ----- RESPONSIVE ----- */
-@media (max-width: 600px) {
-    .instruction-card {
-        padding: 30px 25px;
+/* CARD */
+.profile-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(18px);
+    border-radius: 24px;
+    padding: 35px;
+    display: flex;
+    gap: 35px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    color: #fff;
+}
+
+/* PHOTO */
+.profile-photo {
+    flex: 0 0 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo img {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid transparent;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, #ffffff, #cfc9ff) border-box;
+    animation: glow 3s infinite alternate;
+}
+
+/* PHOTO GLOW */
+@keyframes glow {
+    from { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
+    to   { box-shadow: 0 0 30px rgba(255,255,255,0.9); }
+}
+
+/* DETAILS */
+.profile-details h2 {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.email {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+/* INFO GRID */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.info-grid div {
+    background: rgba(255,255,255,0.15);
+    padding: 15px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.info-grid span {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.info-grid p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+/* BUTTON */
+.continue-btn {
+    padding: 14px 36px;
+    background: linear-gradient(135deg, #ffffff, #e0dcff);
+    color: #5f2cff;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.continue-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* WARNING */
+.warning {
+    color: #ffdddd;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
     }
 
-    .instruction-card h1 {
-        font-size: 22px;
+    .info-grid {
+        grid-template-columns: 1fr;
     }
 }
