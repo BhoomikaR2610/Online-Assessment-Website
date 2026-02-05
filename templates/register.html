@@ -1,31 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Student Registration</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="container">
+<div class="registration-card">
 
-    <h2>Student Registration</h2>
+    <!-- LEFT SIDE - ART -->
+    <div class="card-left">
+        <img src="{{ url_for('static', filename='img1.avif') }}" alt="Illustration" class="hero-image">
+    </div>
 
-    {% for msg in get_flashed_messages() %}
-        <div class="flash">{{ msg }}</div>
-    {% endfor %}
+    <!-- RIGHT SIDE - FORM -->
+    <div class="card-right">
+        <div class="form-wrapper">
 
-    <form method="POST" enctype="multipart/form-data">
-        <input name="name" placeholder="Full Name" required>
-        <input name="email" type="email" placeholder="Email" required>
-        <input name="password" type="password" placeholder="Password" required>
-        <input name="course" placeholder="Course">
-        <input name="school" placeholder="School">
-        <input name="semester" placeholder="Semester">
-        <input type="file" name="photo" required>
-        <button type="submit">Register</button>
-    </form>
+            <!-- LOGO on left -->
+            <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo" class="overlay-logo-left">
 
-    <a href="{{ url_for('login') }}">Already registered? Login</a>
+            <!-- TITLE -->
+            <h2>Student Registration</h2>
+
+            <!-- FORM -->
+            <form method="POST" enctype="multipart/form-data">
+
+                <div class="input-grid">
+
+                    <div class="input-box">
+                        <label for="name">Full Name</label>
+                        <input type="text" name="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="course">Course</label>
+                        <select name="course" required>
+                            <option value="" disabled selected>Select your course</option>
+                            <option value="BSc CS">BSc CS</option>
+                            <option value="BSc IT">BSc IT</option>
+                            <option value="BCA">BCA</option>
+                            <option value="MSc CS">MSc CS</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="phone">Phone</label>
+                        <input type="text" name="phone" placeholder="Enter your phone">
+                    </div>
+
+                    <div class="input-box">
+                        <label for="Institution">School</label>
+                        <input type="text" name="school" placeholder="Enter your Institution">
+                    </div>
+
+                    <div class="input-box">
+                        <label for="Semester">Course Duration</label>
+                        <input type="text" name="semester" placeholder="Enter the Course Duration ">
+                    </div>
+
+                    <div class="input-box">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+                    </div>
+
+                    <div class="input-box full-width">
+                        <label for="roll_no">Code</label>
+                        <input type="text" name="roll_no" placeholder="Enter code given by faculty" required>
+                    </div>
+
+                    <div class="input-box full-width">
+                        <label for="photo">Upload Photo</label>
+                        <input type="file" name="photo" required>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="next-btn">Next Step →</button>
+
+            </form>
+
+            <p class="footer-text">
+                Already have an account? <a href="{{ url_for('login') }}">Login In</a>
+            </p>
+
+        </div>
+    </div>
 
 </div>
 
