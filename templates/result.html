@@ -45,6 +45,11 @@
         .btn-home:hover {
             background: #16305a;
         }
+        .info-note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -56,8 +61,12 @@
             <p><strong>Total Questions:</strong> {{ total }}</p>
             <p><strong>Answered Questions:</strong> {{ answered }}</p>
             <p><strong>Unanswered Questions:</strong> {{ unanswered }}</p>
+            {% if flagged is defined %}
             <p><strong>Flagged Questions:</strong> {{ flagged }}</p>
+            {% endif %}
         </div>
+
+        <p class="info-note">You have completed the assessment. You cannot attempt it again.</p>
 
         <a href="{{ url_for('dashboard') }}" class="btn-home">Back to Dashboard</a>
     </div>
